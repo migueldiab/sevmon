@@ -1,5 +1,6 @@
 package com.sabre.hdt.entities;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -210,5 +211,15 @@ public class Activity extends PersistentObject{
 
 	public static Activity findByPK(String activityId) throws ActivityNotFoundException {
 		return getDaoStatic().findActivitieByPK(activityId);
+	}
+
+	public static Collection<Activity> findAll() {
+		Collection<Activity> activities = null;
+		try {
+			activities = getDaoStatic().findAll();
+		} catch (ActivityNotFoundException e) {
+			logger.info("No activities where found...");
+		}
+		return activities;
 	}
 }
