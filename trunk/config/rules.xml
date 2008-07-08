@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules>
+	<rulesGroup id="1">
+		<rule class="com.sabre.hdt.rules.impl.TestRule"></rule>
+		<rule class="com.sabre.hdt.rules.impl.TestRule"></rule>
+	</rulesGroup>
+	
+	<rulesGroup id="2">
+		<rule class="com.sabre.hdt.rules.impl.TestRule"></rule>
+		<rule class="com.sabre.hdt.rules.impl.TestRule"></rule>
+	</rulesGroup>
+</rules>

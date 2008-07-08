@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE rules [
+	<!ELEMENT rulesGroup (rule*)>
+	<!ELEMENT rule>
+	<!ATTLIST rulesGroup id CDATA #REQUIRED>
+	<!ATTLIST rule class CDATA #REQUIRED>
+]>
