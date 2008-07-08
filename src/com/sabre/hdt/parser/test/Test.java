@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.sabre.hdt.entities.Activity;
-import com.sabre.hdt.parser.db.DataSource;
+import com.sabre.hdt.persistence.DataSource;
 import com.sabre.hdt.rules.engine.core.RulesGroup;
 
 public class Test {
