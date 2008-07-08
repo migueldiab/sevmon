@@ -12,6 +12,7 @@ import com.sabre.hdt.persistence.dao.exceptions.ActivityNotFoundException;
 
 public class Activity extends PersistentObject{
 	private static Logger logger = Logger.getLogger(Activity.class.getName());
+
 	private String activityId;
 	private String activityName;
 	private String status;
