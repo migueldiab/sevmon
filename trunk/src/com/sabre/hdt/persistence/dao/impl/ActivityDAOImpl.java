@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.log4j.Logger;
 
@@ -211,6 +213,51 @@ public class ActivityDAOImpl implements ActivityDAO {
 			DBUtil.closeStatement(stmtUpdate);
 			DBUtil.closeJDBCConnection(conn);
 		}
+	}
+
+	@Override
+	public Collection<Activity> findAll() throws ActivityNotFoundException {
+
+		Connection conn = DataSource.getConnection();
+
+		Collection<Activity> result = new ArrayList<Activity>();
+
+		ResultSet rs = null;
+		PreparedStatement stmtSelect = null;
+
+		try {
+			StringBuffer sbSelect = new StringBuffer();
+
+			sbSelect.append("SELECT * FROM ");
+			sbSelect.append(ActivityDAOImpl.TABLE_NAME);
+
+			stmtSelect = conn.prepareStatement(sbSelect.toString());
+			rs = stmtSelect.executeQuery();
+			while (rs.next()) {
+				Activity activity = new Activity(rs.getString("activity_id"),
+						rs.getString("activity_name"), rs.getString("status"),
+						rs.getString("attachments"), rs.getString("email_cc"),
+						rs.getString("account_location"), rs
+								.getString("description"), rs
+								.getString("email_sender"), rs
+								.getDate("last_updated"), rs
+								.getDate("planned_start"), rs
+								.getDate("created"));
+				result.add(activity);
+			}
+			if (result.isEmpty()) {
+				logger.info("No activities were found...");
+				throw new ActivityNotFoundException();
+			}
+		} catch (SQLException ex) {
+			logger.error(ex);
+			throw new DAORuntimeException(ex);
+		} finally {
+			DBUtil.closeStatement(stmtSelect);
+			DBUtil.closeResultSet(rs);
+			DBUtil.closeJDBCConnection(conn);
+		}
+		return result;
 	}
 
 }
