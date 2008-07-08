@@ -10,7 +10,7 @@ public abstract class Rule {
 	List<Integer> res;
 	private int id;
 	
-	public double execute(Activity activity){		
+	public int execute(Activity activity){		
 		return 0;
 	}
 	

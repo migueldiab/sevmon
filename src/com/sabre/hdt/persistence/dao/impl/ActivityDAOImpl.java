@@ -22,7 +22,6 @@ public class ActivityDAOImpl implements ActivityDAO {
 			.getName());
 	private static final String TABLE_NAME = "activities";
 
-	@Override
 	public void deleteActivity(String id) throws ActivityNotFoundException {
 		if (id == null) {
 			logger.error("id parameter must be set!");
@@ -59,7 +58,6 @@ public class ActivityDAOImpl implements ActivityDAO {
 		}
 	}
 
-	@Override
 	public Activity findActivitieByPK(String pk)
 			throws ActivityNotFoundException {
 		if (pk == null || pk.trim().equals("")) {
@@ -110,7 +108,6 @@ public class ActivityDAOImpl implements ActivityDAO {
 		return result;
 	}
 
-	@Override
 	public void insertActivity(Activity activity) {
 
 		PreparedStatement stmtInsert = null;
@@ -161,7 +158,6 @@ public class ActivityDAOImpl implements ActivityDAO {
 
 	}
 
-	@Override
 	public void updateActivity(Activity activity) {
 
 		Connection conn = DataSource.getConnection();
@@ -215,7 +211,6 @@ public class ActivityDAOImpl implements ActivityDAO {
 		}
 	}
 
-	@Override
 	public Collection<Activity> findAll() throws ActivityNotFoundException {
 
 		Connection conn = DataSource.getConnection();
