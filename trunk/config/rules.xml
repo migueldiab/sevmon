@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules>
 	<rulesGroup id="1">
-		<rule class="com.sabre.hdt.rules.impl.TestRule"></rule>
-		<rule class="com.sabre.hdt.rules.impl.TestRule"></rule>
+		<rule class="com.sabre.hdt.rules.impl.TestRule" value="12"></rule>
+		<rule class="com.sabre.hdt.rules.impl.TestRule" value="13"></rule>
 	</rulesGroup>
 	
 	<rulesGroup id="2">
-		<rule class="com.sabre.hdt.rules.impl.TestRule"></rule>
-		<rule class="com.sabre.hdt.rules.impl.TestRule"></rule>
+		<rule class="com.sabre.hdt.rules.impl.TestRule" value="14"></rule>
+		<rule class="com.sabre.hdt.rules.impl.TestRule" value="15"></rule>
 	</rulesGroup>
 </rules>
