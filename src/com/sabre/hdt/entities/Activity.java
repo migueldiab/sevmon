@@ -58,11 +58,9 @@ public class Activity extends PersistentObject{
 		return activityName;
 	}
 
-
 	public void setActivityName(String activityName) {
 		this.activityName = activityName;
 	}
-
 
 	public String getStatus() {
 		return status;
@@ -73,81 +71,65 @@ public class Activity extends PersistentObject{
 		this.status = status;
 	}
 
-
 	public String getAttachments() {
 		return attachments;
 	}
-
 
 	public void setAttachments(String attachments) {
 		this.attachments = attachments;
 	}
 
-
 	public String getEmailCC() {
 		return emailCC;
 	}
-
 
 	public void setEmailCC(String emailCC) {
 		this.emailCC = emailCC;
 	}
 
-
 	public String getAccountLocation() {
 		return accountLocation;
 	}
-
 
 	public void setAccountLocation(String accountLocation) {
 		this.accountLocation = accountLocation;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public String getEmailSender() {
 		return emailSender;
 	}
-
 
 	public void setEmailSender(String emailSender) {
 		this.emailSender = emailSender;
 	}
 
-
 	public Date getLastUpdated() {
 		return lastUpdated;
 	}
-
 
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
 
-
 	public Date getPlannedStart() {
 		return plannedStart;
 	}
-
 
 	public void setPlannedStart(Date plannedStart) {
 		this.plannedStart = plannedStart;
 	}
 
-
 	public Date getCreated() {
 		return created;
 	}
-
 
 	public void setCreated(Date created) {
 		this.created = created;
