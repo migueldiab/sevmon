@@ -2,8 +2,15 @@ package com.sabre.hdt.entities;
 
 import java.util.Date;
 
-public class Activity {
+import org.apache.log4j.Logger;
 
+import com.sabre.hdt.persistence.DAOFactory;
+import com.sabre.hdt.persistence.PersistentObject;
+import com.sabre.hdt.persistence.dao.ActivityDAO;
+import com.sabre.hdt.persistence.dao.exceptions.ActivityNotFoundException;
+
+public class Activity extends PersistentObject{
+	private static Logger logger = Logger.getLogger(Activity.class.getName());
 	private String activityId;
 	private String activityName;
 	private String status;
@@ -15,6 +22,7 @@ public class Activity {
 	private Date lastUpdated;
 	private Date plannedStart;
 	private Date created;
+	private ActivityDAO dao;
 	
 	public Activity(String activityId, String activityName, String status, String attachments, String emailCC, String accountLocation,
 			String description, String emailSender, Date lastUpdated, Date plannedStart, Date created){
@@ -144,6 +152,21 @@ public class Activity {
 		this.created = created;
 	}
 
+	public ActivityDAO getDao() {
+		if(this.dao == null){
+			this.dao = (ActivityDAO)DAOFactory.getDAO(Activity.class.getName());
+		}
+		return dao;
+	}
+
+	public void setDao(ActivityDAO dao) {
+		this.dao = dao;
+	}
+
+	public static ActivityDAO getDaoStatic(){
+		return (ActivityDAO)DAOFactory.getDAO(Activity.class.getName());
+	} 
+	
 	@Override
 	public String toString() {
 		return this.activityId + " " + 
@@ -159,4 +182,33 @@ public class Activity {
 		this.created + " ";
 	}
 
+	@Override
+	public void delete() {
+		try {
+			getDao().deleteActivity(this.getActivityId());
+		} catch (ActivityNotFoundException e) {
+			logger.error(e);
+			throw new RuntimeException(e);
+		}
+		
+	}
+
+	@Override
+	public void insert() {
+		getDao().insertActivity(this);
+	}
+
+	@Override
+	public void update() {
+		try {
+			getDao().updateActivity(this);
+		} catch (ActivityNotFoundException e) {
+			logger.error(e);
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static Activity findByPK(String activityId) throws ActivityNotFoundException {
+		return getDaoStatic().findActivitieByPK(activityId);
+	}
 }
