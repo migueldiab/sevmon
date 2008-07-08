@@ -21,13 +21,45 @@ public class ActivityDAOImpl implements ActivityDAO {
 	private static final String TABLE_NAME = "activities";
 
 	@Override
-	public void deleteMovie(String id) throws ActivityNotFoundException {
-		// TODO Auto-generated method stub
+	public void deleteActivity(String id) throws ActivityNotFoundException {
+		if (id == null) {
+			logger.error("id parameter must be set!");
+			throw new DAORuntimeException("id parameter must be set!");
+		}
 
+		Connection conn = DataSource.getConnection();
+
+		PreparedStatement stmtDelete = null;
+
+		try {
+			StringBuffer sbDelete = new StringBuffer();
+
+			sbDelete.append("DELETE FROM ");
+			sbDelete.append(ActivityDAOImpl.TABLE_NAME);
+			sbDelete.append(" WHERE activity_id = ?");
+
+			stmtDelete = conn.prepareStatement(sbDelete.toString());
+
+			stmtDelete.setString(1, id);
+
+			int rows = stmtDelete.executeUpdate();
+
+			if (rows != 1) {
+				throw new SQLException("executeUpdate return value: " + rows);
+			}
+
+		} catch (SQLException ex) {
+			logger.error(ex);
+			throw new DAORuntimeException(ex);
+		} finally {
+			DBUtil.closeStatement(stmtDelete);
+			DBUtil.closeJDBCConnection(conn);
+		}
 	}
 
 	@Override
-	public Activity findMovieByPK(String pk) throws ActivityNotFoundException {
+	public Activity findActivitieByPK(String pk)
+			throws ActivityNotFoundException {
 		if (pk == null || pk.trim().equals("")) {
 			logger.error("Activity PK is required!");
 			throw new DAORuntimeException("Activity PK is required!");
