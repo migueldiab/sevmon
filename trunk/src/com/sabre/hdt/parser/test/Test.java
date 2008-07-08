@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.sabre.hdt.entities.Activity;
-import com.sabre.hdt.persistence.DataSource;
+//import com.sabre.hdt.persistence.DataSource;
+import com.sabre.hdt.rules.engine.core.RegularExpressions;
 import com.sabre.hdt.rules.engine.core.RulesGroup;
 
 public class Test {
@@ -15,26 +16,14 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Connection conn = DataSource.getConnection();
-		try {
-			PreparedStatement ps = conn.prepareStatement("select * from employee where empFirstName = ?");
-			ps.setString(1, "Guillermo");
-			if(ps.execute()){
-				ResultSet rs = ps.getResultSet();
-				while(rs.next()){
-					System.out.println(rs.getString("empFirstName"));
-					System.out.println(rs.getString("empLastName"));
-				}
+					
+		//Connection conn = DataSource.getConnection();
 				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		RulesGroup rg = new RulesGroup(1);
-		rg.execute(new Activity());
+		RegularExpressions res = new RegularExpressions();
+		res.loadRegularExpression();
 		
+		RulesGroup rg = new RulesGroup();
+		rg.execute(new Activity());		
 	}
 
 }

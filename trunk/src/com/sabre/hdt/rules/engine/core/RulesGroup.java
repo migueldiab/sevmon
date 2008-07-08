@@ -16,28 +16,15 @@ import com.sabre.hdt.entities.Activity;
 public class RulesGroup {
 	private static Logger logger = Logger.getLogger(RulesGroup.class.getName());
 
-	private int ruleId;
 	private List<Rule> rules;
 	private static Map<String, Element> ruleGroupElements;
-	
-	public RulesGroup() {
-		// TODO Auto-generated constructor stub
-	}
+		
 
-	public RulesGroup(int ruleId) {
-		logger.debug("Creating rules group with ruleid = " + ruleId);
-		this.ruleId = ruleId;
+	public RulesGroup() {
+		logger.debug("Creating rules...");
 		this.rules = new ArrayList<Rule>();
 		this.loadRules();
-	}
-
-	public int getRuleId() {
-		return ruleId;
-	}
-
-	public void setRuleId(int ruleId) {
-		this.ruleId = ruleId;
-	}
+	}	
 
 	public double execute(Activity activity){
 		double output = 0;
@@ -49,7 +36,7 @@ public class RulesGroup {
 	}
 	
 	private void loadRules() {
-		logger.debug("Loading rules for rule's group id = " + getRuleId());
+		logger.debug("Loading rules...");
 	    try {
 	        //  Use SAXBuilder
 	        SAXBuilder builder = new SAXBuilder();
@@ -58,27 +45,30 @@ public class RulesGroup {
 	        Document doc = builder.build(url.openStream());
 	        Element root = doc.getRootElement();
 	        
-	        List<Element> childs = root.getChildren("rulesGroup");
-
-	        if (ruleGroupElements == null) {
-	        	ruleGroupElements = new HashMap<String, Element>();
+	        List<Element> childs = root.getChildren("rule");
+	        	        	       
 		        for (int i = 0; i < childs.size(); i++) {
 		        	Element child = childs.get(i);
-					String ruleID = child.getAttributeValue("id");
-					ruleGroupElements.put(ruleID, child);
-				}				
-			}
-	        Element el = ruleGroupElements.get(String.valueOf(getRuleId()));
-	        List<Element> ruleElements = el.getChildren();
-
-	        for (int i = 0; i < ruleElements.size(); i++) {
-				Element rule = ruleElements.get(i);
-				this.rules.add((Rule)com.sabre.hdt.util.ClassLoader.loadClass(rule.getAttributeValue("class")));
-			}
-
+					//String ruleID = child.getAttributeValue("class");
+					
+					Rule rl = (Rule)com.sabre.hdt.util.ClassLoader.loadClass(child.getAttributeValue("class"));					
+					rl.setValue(Integer.parseInt(child.getAttributeValue("value")));
+					rl.setID(Integer.parseInt(child.getAttributeValue("id")));
+					logger.debug("Setting Rule "+child.getAttributeValue("class")+ "value = " + rl.getValue());
+					
+					List<Element> ruleElements = child.getChildren();
+					
+					for (int j = 0; j < ruleElements.size(); j++) {
+						
+			        	Element ch = ruleElements.get(j);
+						String ruleID = ch.getAttributeValue("id");
+						rl.setRE(Integer.parseInt(ruleID));
+						logger.debug("Setting Rule RE id = " + ruleID);
+					}
+				}						
+		        
 	      } catch (Exception e) {
 	    	  e.printStackTrace();
-	      }
-
+	      }	      
 	}
 }
