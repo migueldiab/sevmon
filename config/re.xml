@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <res>
-		<re id=1 exp="severity1" value= ></re>
-		<re id=2 exp="URGENT" value= ></re>
-		<re id=3 exp="do not works" value= ></re>
-		<re id=4 exp="wuawuawuiwua" value= ></re>
+		<re id="1" exp="severity1|severity 1"></re>
+		<re id="2" exp="URGENT"></re>
+		<re id="3" exp="do not works"></re>
+		<re id="4" exp="wuawuawuiwua"></re>
 </res>
