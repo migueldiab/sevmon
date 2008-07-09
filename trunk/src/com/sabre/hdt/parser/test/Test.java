@@ -35,7 +35,7 @@ public class Test {
 			logger.debug(activity);
 			
 			activity.setScore(rg.execute(activity));
-			//activity.update();
+			activity.update();
 		}
 
 	}
