@@ -54,7 +54,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 			throw new DAORuntimeException(ex);
 		} finally {
 			DBUtil.closeStatement(stmtDelete);
-			DBUtil.closeJDBCConnection(conn);
+			//DBUtil.closeJDBCConnection(conn);
 		}
 	}
 
@@ -104,7 +104,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 		} finally {
 			DBUtil.closeStatement(stmtSelect);
 			DBUtil.closeResultSet(rs);
-			DBUtil.closeJDBCConnection(conn);
+			//DBUtil.closeJDBCConnection(conn);
 		}
 		return result;
 	}
@@ -156,7 +156,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 			throw new DAORuntimeException(ex);
 		} finally {
 			DBUtil.closeStatement(stmtInsert);
-			DBUtil.closeJDBCConnection(conn);
+			//DBUtil.closeJDBCConnection(conn);
 		}
 
 	}
@@ -212,7 +212,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 			throw new DAORuntimeException(ex);
 		} finally {
 			DBUtil.closeStatement(stmtUpdate);
-			DBUtil.closeJDBCConnection(conn);
+			//DBUtil.closeJDBCConnection(conn);
 		}
 	}
 
@@ -257,7 +257,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 		} finally {
 			DBUtil.closeStatement(stmtSelect);
 			DBUtil.closeResultSet(rs);
-			DBUtil.closeJDBCConnection(conn);
+			//DBUtil.closeJDBCConnection(conn);
 		}
 		return result;
 	}
