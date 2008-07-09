@@ -40,8 +40,8 @@ public class ActivityDAOImpl implements ActivityDAO {
 			sbDelete.append(" WHERE activity_id = ?");
 
 			stmtDelete = conn.prepareStatement(sbDelete.toString());
-
 			stmtDelete.setString(1, id);
+			logger.debug("SQL: " + stmtDelete.toString());
 
 			int rows = stmtDelete.executeUpdate();
 
@@ -79,9 +79,8 @@ public class ActivityDAOImpl implements ActivityDAO {
 			sbSelect.append(" WHERE activity_id = ?");
 
 			stmtSelect = conn.prepareStatement(sbSelect.toString());
-
 			stmtSelect.setString(1, pk);
-
+			logger.debug("SQL: " + stmtSelect.toString());
 			rs = stmtSelect.executeQuery();
 			if (rs.next()) {
 				result = new Activity(rs.getString("activity_id"), rs
@@ -142,8 +141,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 			stmtInsert.setInt(12, activity.getScore());
 
 
-			logger.info("About to execute INSERT: values "
-					+ activity.toString());
+			logger.debug("SQL: " + stmtInsert.toString());
 
 			int rows = stmtInsert.executeUpdate();
 
@@ -174,20 +172,19 @@ public class ActivityDAOImpl implements ActivityDAO {
 			sbUpdate.append(ActivityDAOImpl.TABLE_NAME);
 			sbUpdate.append(" SET ");
 			sbUpdate.append(" Activity_Name = ?, ");
-			sbUpdate.append(" status = ? ");
+			sbUpdate.append(" status = ?, ");
 			sbUpdate.append(" attachments = ?, ");
 			sbUpdate.append(" email_cc = ?, ");
-			sbUpdate.append(" account_location = ? ");
+			sbUpdate.append(" account_location = ?, ");
 			sbUpdate.append(" description = ?, ");
 			sbUpdate.append(" email_sender = ?, ");
-			sbUpdate.append(" last_updated = ? ");
+			sbUpdate.append(" last_updated = ?, ");
 			sbUpdate.append(" planned_start = ?, ");
 			sbUpdate.append(" created = ?, ");
 			sbUpdate.append(" score = ? ");
 			sbUpdate.append(" WHERE activity_id = ?");
-			logger.debug("SQL: sbUpdate.toString()");
-			stmtUpdate = conn.prepareStatement(sbUpdate.toString());
 
+			stmtUpdate = conn.prepareStatement(sbUpdate.toString());
 			stmtUpdate.setString(1, activity.getActivityName());
 			stmtUpdate.setString(2, activity.getStatus());
 			stmtUpdate.setString(3, activity.getAttachments());
@@ -203,6 +200,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 					.getTime()));
 			stmtUpdate.setInt(11, activity.getScore());
 			stmtUpdate.setString(12, activity.getActivityId());
+			logger.debug("SQL: " + stmtUpdate.toString());
 			int rows = stmtUpdate.executeUpdate();
 
 			if (rows != 1) {
@@ -233,6 +231,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 			sbSelect.append(ActivityDAOImpl.TABLE_NAME);
 
 			stmtSelect = conn.prepareStatement(sbSelect.toString());
+			logger.debug("SQL: " + stmtSelect.toString());
 			rs = stmtSelect.executeQuery();
 			while (rs.next()) {
 				Activity activity = new Activity(rs.getString("activity_id"),
