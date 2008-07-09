@@ -37,7 +37,6 @@ public class Test {
 			activity.setScore(rg.execute(activity));
 			activity.update();
 		}
-
 	}
 
 }
