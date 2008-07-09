@@ -222,9 +222,14 @@ public class Activity extends PersistentObject{
 		
 		Date tmpDate = new Date(this.getPlannedStart().getTime());
 		Date now = new Date();  
+		
+		logger.debug("TIME NOW" + now);
+		logger.debug("TIME BASE" + tmpDate);
 			
 		TimeSpan ts = TimeSpan.subtract(now,tmpDate);
-				    
+
+		logger.debug("TIME TS" + ts.getMinutes() );
+		
 		return (int) ts.getMinutes(); 
 		//TimeSpan 
 		
