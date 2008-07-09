@@ -38,7 +38,7 @@ public abstract class Rule {
 	
 	public List<Integer> getRegularExpressions(){
 		return res;
-	}
+	}		
 }
 
 

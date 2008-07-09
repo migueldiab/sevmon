@@ -24,10 +24,12 @@ public class Rule001 extends Rule {
 			
             if (regexFit.find()) {
             	logger.debug(" INSIDE REGEXP");
-            	tmpScore = tmpScore + this.getValue() + 10;     
+            	logger.debug("LIFETIME  :" + activity.getLifeTime() );
+            	tmpScore = (int)(tmpScore + this.getValue() + activity.getLifeTime() * 0.5); 
+            	
             } 
 		}
-		
+		logger.debug("RULE SCORE" + tmpScore );
 		return tmpScore;		
 	}
 }

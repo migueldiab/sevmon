@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules>
 		<rule id="1" class="com.sabre.hdt.rules.impl.TestRule" value="12">
+				<re id="0"></re>
 				<re id="1"></re>
 				<re id="2"></re>
 				<re id="3"></re>
-				<re id="4"></re>
 		</rule>
 		<rule id="2" class="com.sabre.hdt.rules.impl.REOverSubject" value="13">
+				<re id="0"></re>
 				<re id="1"></re>
 				<re id="2"></re>
 				<re id="3"></re>
-				<re id="4"></re>
 		</rule>
 		<rule id="2" class="com.sabre.hdt.rules.impl.Rule001" value="13">
+				<re id="0"></re>
 				<re id="1"></re>
 				<re id="2"></re>
 				<re id="3"></re>
-				<re id="4"></re>
 		</rule>
 </rules>

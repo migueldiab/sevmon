@@ -1,5 +1,6 @@
 package com.sabre.hdt.entities;
 
+import java.sql.Time;
 import java.util.Collection;
 import java.util.Date;
 
@@ -217,4 +218,19 @@ public class Activity extends PersistentObject{
 		}
 		return activities;
 	}
+	
+	public int getLifeTime(){
+		
+		Date tmpDate = this.getPlannedStart();
+		Date now = new Date();  
+			
+		TimeSpan ts = TimeSpan.subtract(tmpDate, now);
+				    
+		return (int) ts.getMinutes(); 
+		//TimeSpan 
+		
+		//tmpDate.getTime();
+		//this.getPlannedStart() 
+		
+	}	
 }
