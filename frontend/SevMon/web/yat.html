@@ -1,0 +1,263 @@
+<html>
+  <head>
+    
+    <title>Severity Monitor</title>
+    <link rel="stylesheet" type="text/css" href="./resources/css/ext-all.css" />
+    <link rel="stylesheet" type="text/css" href="./css/graph.css" />
+    <!-- GC -->
+    <!-- LIBS -->
+    <script type="text/javascript" src="./adapter/ext/ext-base.js"></script>
+
+    <script type="text/javascript" src="./js/prototype.js"></script>
+    
+    <!-- ENDLIBS -->
+    <script type="text/javascript" src="./ext-all.js"></script>
+    <!--<script language="javascript" src="./grid/PropsGrid.js"></script>-->
+    <style type="text/css">
+      html, body {
+        font:normal 12px verdana;
+        margin:0;
+        padding:0;
+        border:0 none;
+        overflow:hidden;
+        height:100%;
+      }
+      p {
+	    margin:5px;
+      }
+      .settings {
+        background-image:url(./shared/icons/fam/folder_wrench.png);
+      }
+      .nav {
+        background-image:url(./shared/icons/fam/folder_go.png);
+      }
+    </style>
+	<script type="text/javascript">
+      Ext.onReady(
+        function() {
+          Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+
+          // Data Source of SI Priorities to display on the right panel.
+          var myData = [
+            ['1-E37FTZ',72,''],['1-E37FUH',28,''],['1-E37FV1',27,''],['1-E37FWJ',50,''],['1-E37FYG',67,''],['1-E37G05',85,''],['1-E37G0S',23,''],['1-E37G2W',63,''],['1-E37G34',44,''],['1-E37G5G',32,''],['1-E37G5P',26,''],['1-E37G7K',35,''],['1-E37GA6',97,''],['1-E37GBH',79,''],['1-E37GCK',6,''],['1-E38BAZ',92,''],['1-E38BGR',42,''],['1-E38BOP',35,''],['1-E38BRM',47,''],['1-E38BTX',32,''],['1-E38BUM',17,''],['1-E38BV1',90,''],['1-E38BVK',98,''],['1-E38BWW',20,''],['1-E38BYF',7,''],['1-E38BYP',74,''],['1-E38BZF',51,''],['1-E399YP',32,''],['1-E399ZF',7,''],['1-E39A1X',37,''],['1-E39A3I',65,''],['1-E39A47',13,''],['1-E39A9V',72,''],['1-E39AA5',19,''],['1-E39ALU',82,''],['1-E39ANB',49,''],['1-E39ANK',3,''],['1-E39ANR',65,''],['1-E3AEUA',17,''],['1-E3AEV9',89,''],['1-E3AEVP',95,''],['1-E3AF11',7,''],['1-E3AF1K',49,''],['1-E3AF3U',24,''],['1-E3AF4X',76,''],['1-E3AF52',4,''],['1-E3AF5Q',95,''],['1-E3AFBR',63,''],['1-E3AFBZ',30,''],['1-E3AFCB',60,''],['1-E3AFDD',11,''],['1-E3AFDL',76,''],['1-E3AFDV',47,''],['1-E3AFER',7,''],['1-E3AFFL',93,''],['1-E3AFIZ',43,''],['1-E3AFKM',35,''],['1-E3C7PE',48,''],['1-E3C7PS',35,''],['1-E3C7QU',32,''],['1-E3C7RV',54,''],['1-E3C7V0',73,''],['1-E3C7WY',4,''],['1-E3C86C',2,''],['1-E3C86E',99,''],['1-E3C8C2',87,''],['1-E3C8CA',40,''],['1-E3C8CQ',40,''],['1-E3CNUV',77,''],['1-E3CO22',65,''],['1-E3CO2Y',96,''],['1-E3CO4K',86,''],['1-E3COB4',42,''],['1-E3COBC',50,''],['1-E3COD0',23,''],['1-E3CODM',66,''],['1-E3COJE',62,''],['1-E3COLK',12,''],['1-E3COME',74,''],['1-E3DLUJ',33,''],['1-E3DLUV',42,''],['1-E3DLZN',11,''],['1-E3DM15',31,''],['1-E3DM6F',22,''],['1-E3DM7F',18,''],['1-E3DM9R',21,''],['1-E3DME6',52,''],['1-E3DMHA',97,''],['1-E3DMHI',27,''],['1-E3DMJZ',47,''],['1-E3E18U',54,''],['1-E3E18Y',30,''],['1-E3E1C5',89,''],['1-E3E1LL',52,''],['1-E3E1N0',92,''],['1-E3E1O7',7,''],['1-E3E1P3',57,''],['1-E3E1PB',65,''],['1-E3E1R7',52,''],['1-E3E1U8',66,''],['1-E3E1VW',74,''],['1-E3E1VZ',74,''],['1-E3FQCG',46,''],['1-E3FQCO',10,''],['1-E3FQDA',12,''],['1-E3FQDI',27,''],['1-E3FQDX',2,''],['1-E3FQE0',29,''],['1-E3FQEM',37,''],['1-E3FQEW',99,''],['1-E3FQF4',84,''],['1-E3FQFJ',24,''],['1-E3FQFW',66,''],['1-E3FQG0',59,''],['1-E3FQG8',97,''],['1-E3FQGG',10,''],['1-E3FQGL',57,''],['1-E3FQH5',54,''],['1-E3FQI8',99,''],['1-E3FQII',32,''],['1-E3FQJ4',63,''],['1-E3FQJG',22,''],['1-E3FQJR',17,''],['1-E3FTIF',23,''],['1-E3FTJP',61,''],['1-E3FTL5',39,''],['1-E3FTLP',9,''],['1-E3FTSB',30,''],['1-E3FTTU',20,''],['1-E3FTVE',13,''],['1-E3FU2M',3,''],['1-E3G0FI',76,''],['1-E3G0HI',71,''],['1-E3G0QC',29,''],['1-E3G0QM',29,''],['1-E3G0R2',59,''],['1-E3G0TR',10,''],['1-E3G0UH',71,''],['1-E3G0WY',24,''],['1-E3G0YB',8,''],['1-E3G11Y',69,''],['1-E3GEZE',21,''],['1-E3GF2Y',98,''],['1-E3GF3F',28,''],['1-E3GL5B',45,''],['1-E3GL5L',41,''],['1-E3GL62',69,''],['1-E3GL68',22,''],['1-E3GL6F',5,''],['1-E3GL8P',57,''],['1-E3GL91',72,''],['1-E3GL9H',86,''],['1-E3GL9X',17,''],['1-E3GLAP',25,''],['1-E3GLAR',73,''],['1-E3GLAX',91,''],['1-E3GLB3',38,''],['1-E3GLB9',16,''],['1-E3GLBD',67,''],['1-E3GLBL',87,''],['1-E3GLBR',33,''],['1-E3GLBZ',6,''],['1-E3GLC9',31,''],['1-E3GLEN',35,''],['1-E3GLJ1',81,''],['1-E3GLP0',3,''],['1-E3GLQQ',69,''],['1-E3GLR8',36,''],['1-E3GLUN',75,''],['1-E3GZTM',65,''],['1-E3GZV9',99,''],['1-E3GZVJ',3,''],['1-E3GZW0',16,''],['1-E3GZWM',72,''],['1-E3GZZU',12,''],['1-E3H004',44,''],['1-E3H01D',86,''],['1-E3H02I',96,''],['1-E3HG1R',20,''],['1-E3HG1Y',16,''],['1-E3HG20',16,''],['1-E3HG2I',35,''],['1-E3HG36',25,''],['1-E3HG3M',21,''],['1-E3HG3Y',32,''],['1-E3HGAL',95,''],['1-E3HGE9',80,''],['1-E3HGG4',15,''],['1-E3HGI6',36,''],['1-E3HGKX',32,''],['1-E3HGLW',54,''],['1-E3I1N4',75,''],['1-E3I1S3',12,''],['1-E3I1T6',37,''],['1-E3I1TL',46,''],['1-E3I1W3',18,''],['1-E3I1YL',55,''],['1-E3I1YR',20,''],['1-E3I1ZW',37,''],['1-E3I21U',23,''],['1-E3I221',6,''],['1-E3I22A',59,''],['1-E3I23S',78,''],['1-E3I26D',11,''],['1-E3I27W',23,''],['1-E3I28O',82,''],['1-E3I28Y',42,''],['1-E3I29M',63,''],['1-E3I2BR',91,''],['1-E3IO16',64,''],['1-E3IO2O',46,''],['1-E3IO3X',38,''],['1-E3IO6O',51,''],['1-E3IOCS',42,''],['1-E3IOEI',56,''],['1-E3IOHE',54,''],['1-E3IOHH',4,''],           
+          ];
+          var store = new Ext.data.SimpleStore({
+            fields: [{name: 'si'},
+              {name: 'score', type: 'float'},
+              {name: 'lastChange', type: 'date', dateFormat: 'h:i'}]});
+          store.loadData(myData);
+          var siAirmax = new Ext.grid.GridPanel({
+            store: store,
+            columns: [
+              {id:'si',header: "SI #", width: 160, sortable: true, dataIndex: 'si'},
+              {header: "Score", width: 75, sortable: true, dataIndex: 'score'},
+              {header: "Time", width: 85, sortable: true, renderer: Ext.util.Format.dateRenderer('h:i'), dataIndex: 'lastChange'}
+            ],
+            stripeRows: true,
+            autoExpandColumn: 'si',
+            height:350,
+            width:600,
+            title:'Airmax'
+          });
+          var siGeneral = new Ext.grid.GridPanel({
+            store: store,
+            columns: [
+              {id:'si',header: "SI #", width: 160, sortable: true, dataIndex: 'si'},
+              {header: "Score", width: 75, sortable: true, dataIndex: 'score'},
+              {header: "Time", width: 85, sortable: true, renderer: Ext.util.Format.dateRenderer('h:i'), dataIndex: 'lastChange'}
+            ],
+            stripeRows: true,
+            autoExpandColumn: 'si',
+            height:350,
+            width:600,
+            title:'General'
+          });
+          var northPanel = new Ext.BoxComponent({
+            region:'north',
+            el: 'north',
+            height:32
+          });
+          var southPanel = {
+            region:'south',
+            contentEl: 'south',
+            split:true,
+            height: 100,
+            minSize: 100,
+            maxSize: 200,
+            collapsible: true,
+            title:'La Barra de Abajo',
+            margins:'0 0 0 0'}
+          var eastPanel = {
+            region:'east',
+            title: 'Service Incidents',
+            //collapsible: true,
+            split:true,
+            width: 225,
+            minSize: 175,
+            maxSize: 400,
+            layout:'fit',
+            margins:'0 5 0 0',
+            items: new Ext.TabPanel
+            ({
+              border:false,
+              activeTab:1,
+              tabPosition:'bottom',
+              items:[
+                siGeneral,
+                siAirmax
+              ]
+            })};
+          var westPanel = {
+            region:'west',
+            id:'west-panel',
+            title:'Thermometer',
+            split:true,
+            width: 200,
+            minSize: 175,
+            maxSize: 400,
+            //collapsible: true,
+            margins:'0 0 0 5',
+            //layout:'accordion',
+            layoutConfig:{animate:true},
+            items:
+            [{
+              contentEl: 'termometro',
+              border:false,
+              iconCls:'airmax'
+            }]
+          };
+          var centerPanel = new Ext.TabPanel
+          ({
+            region:'center',
+            deferredRender:false,
+            activeTab:0,
+            items:
+            [{contentEl:'graphs',
+              title: 'Graphs',
+              //closable:true,
+              autoScroll:true}]
+          });
+          var viewport = new Ext.Viewport
+          ({
+            layout:'border',
+            items:
+            [northPanel,southPanel,eastPanel,westPanel,centerPanel]
+          });          
+        }
+      );
+	</script>
+  </head>
+
+  <body>
+    
+    <div id="termometro">
+      <div id="graph">
+        <table height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr style="background-color:#f00000;" height="4%"><td align='center'>
+                <b>9</b>
+              </td></tr>
+          <tr style="background-color:#e4060c;" height="5%"><td align='center'>
+
+                <b>11</b>
+              </td></tr>
+          <tr style="background-color:#d80c18;" height="6%"><td align='center'>
+                <b>12</b>
+              </td></tr>
+          <tr style="background-color:#cc1224;" height="6%"><td align='center'>
+                <b>12</b>
+
+              </td></tr>
+          <tr style="background-color:#c01830;" height="8%"><td align='center'>
+                <b>18</b>
+              </td></tr>
+          <tr style="background-color:#b41e3c;" height="5%"><td align='center'>
+                <b>11</b>
+              </td></tr>
+          <tr style="background-color:#a82448;" height="6%"><td align='center'>
+
+                <b>14</b>
+              </td></tr>
+          <tr style="background-color:#9c2a54;" height="7%"><td align='center'>
+                <b>15</b>
+              </td></tr>
+          <tr style="background-color:#903060;" height="5%"><td align='center'>
+                <b>11</b>
+
+              </td></tr>
+          <tr style="background-color:#84366c;" height="5%"><td align='center'>
+                <b>10</b>
+              </td></tr>
+          <tr style="background-color:#783c78;" height="6%"><td align='center'>
+                <b>12</b>
+              </td></tr>
+          <tr style="background-color:#6c4284;" height="4%"><td align='center'>
+
+                <b>8</b>
+              </td></tr>
+          <tr style="background-color:#604890;" height="4%"><td align='center'>
+                <b>8</b>
+              </td></tr>
+          <tr style="background-color:#544e9c;" height="6%"><td align='center'>
+                <b>13</b>
+
+              </td></tr>
+          <tr style="background-color:#4854a8;" height="6%"><td align='center'>
+                <b>12</b>
+              </td></tr>
+          <tr style="background-color:#3c5ab4;" height="4%"><td align='center'>
+                <b>8</b>
+              </td></tr>
+          <tr style="background-color:#3060c0;" height="2%"><td align='center'>
+
+                <b>5</b>
+              </td></tr>
+          <tr style="background-color:#2466cc;" height="4%"><td align='center'>
+                <b>8</b>
+              </td></tr>
+          <tr style="background-color:#186cd8;" height="3%"><td align='center'>
+                <b>6</b>
+
+              </td></tr>
+          <tr style="background-color:#0c72e4;" height="6%"><td align='center'>
+                <b>14</b>
+              </td></tr>
+                     
+        </table>
+      </div>
+    </div>
+    <div id="north">
+
+      <p>
+        <center><h1>The Help Desk Severity Monitor</h1></center>
+      </p>
+    </div>
+    <div id="graphs">      
+      <div class="demo" id="canvasline" width="750px" height="380px"></div>
+    </div>
+    <div id="props-panel" style="width:200px;height:200px;overflow:hidden;">
+      <!-- Back Panel ... No usar... -->
+
+    </div>
+    <div id="south">
+      <p>Panel 6</p>
+    </div>
+      <script type="text/javascript" src="mochikit/MochiKit.js"></script>
+      <script type="text/javascript" src="plotkit/excanvas.js"></script>
+      <script type="text/javascript" src="plotkit/PlotKit_Packed.js"></script>
+
+      <script type="text/javascript">
+      //<![CDATA[
+      function criticality() {
+        var hasCanvas = CanvasRenderer.isSupported();
+        var data1 = [[0, 5], [1, 4], [2, 3], [3, 5], [4, 6], [5, 7]];
+        var data2 = [[0, 2.5], [1, 2], [2, 1.5], [3, 2.5], [4, 3], [5,3.5]];
+        var data3 = [[0, 1.25], [1, 1], [2, 0.75], [3, 1.25], [4, 1.5], [5, 1.75]];
+        if (hasCanvas) {
+          var line = new EasyPlot("line", "", $('canvasline'), [data1, data2, data3]);
+        }
+      }
+      addLoadEvent(criticality);
+      //]]>
+      </script>
+  </body>
+</html>

@@ -1,0 +1,182 @@
+<html>
+  <head>
+    
+    <title>Severity Monitor</title>
+    <link rel="stylesheet" type="text/css" href="./resources/css/ext-all.css" />
+    <link rel="stylesheet" type="text/css" href="./css/graph.css" />
+    <!-- GC -->
+    <!-- LIBS -->
+    <script type="text/javascript" src="./adapter/ext/ext-base.js"></script>
+
+    <script type="text/javascript" src="./js/prototype.js"></script>
+    
+    
+    <!-- ENDLIBS -->
+    <script type="text/javascript" src="./ext-all.js"></script>
+    <!--<script language="javascript" src="./grid/PropsGrid.js"></script>-->
+    <style type="text/css">
+      html, body {
+        font:normal 12px verdana;
+        margin:0;
+        padding:0;
+        border:0 none;
+        overflow:hidden;
+        height:100%;
+      }
+      p {
+	    margin:5px;
+      }
+      .settings {
+        background-image:url(./shared/icons/fam/folder_wrench.png);
+      }
+      .nav {
+        background-image:url(./shared/icons/fam/folder_go.png);
+      }
+    </style>
+	<script type="text/javascript">
+      Ext.onReady(
+        function() {
+          Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+
+          // Data Source of SI Priorities to display on the right panel.
+          var myData = [
+            ['1-E37FTZ',39,''],['1-E37FUH',36,''],['1-E37FV1',33,''],['1-E37FWJ',33,''],['1-E37FYG',39,''],['1-E37G05',33,''],['1-E37G0S',33,''],['1-E37G2W',36,''],['1-E37G34',33,''],['1-E37G5G',36,''],['1-E37G5P',36,''],['1-E37G7K',33,''],['1-E37GA6',36,''],['1-E37GBH',33,''],['1-E37GCK',33,''],['1-E38BAZ',36,''],['1-E38BGR',39,''],['1-E38BOP',33,''],['1-E38BRM',39,''],['1-E38BTX',36,''],['1-E38BUM',36,''],['1-E38BV1',36,''],['1-E38BVK',33,''],['1-E38BWW',36,''],['1-E38BYF',39,''],['1-E38BYP',36,''],['1-E38BZF',39,''],['1-E399YP',33,''],['1-E399ZF',30,''],['1-E39A1X',33,''],['1-E39A3I',36,''],['1-E39A47',33,''],['1-E39A9V',36,''],['1-E39AA5',39,''],['1-E39ALU',36,''],['1-E39ANB',33,''],['1-E39ANK',33,''],['1-E39ANR',39,''],['1-E3AEUA',33,''],['1-E3AEV9',33,''],['1-E3AEVP',36,''],['1-E3AF11',33,''],['1-E3AF1K',36,''],['1-E3AF3U',36,''],['1-E3AF4X',36,''],['1-E3AF52',33,''],['1-E3AF5Q',36,''],['1-E3AFBR',33,''],['1-E3AFBZ',36,''],['1-E3AFCB',33,''],['1-E3AFDD',36,''],['1-E3AFDL',39,''],['1-E3AFDV',30,''],['1-E3AFER',36,''],['1-E3AFFL',48,''],['1-E3AFIZ',36,''],['1-E3AFKM',39,''],['1-E3C7PE',33,''],['1-E3C7PS',39,''],['1-E3C7QU',39,''],['1-E3C7RV',33,''],['1-E3C7V0',39,''],['1-E3C7WY',36,''],['1-E3C86C',33,''],['1-E3C86E',36,''],['1-E3C8C2',36,''],['1-E3C8CA',36,''],['1-E3C8CQ',33,''],['1-E3CNUV',36,''],['1-E3CO22',39,''],['1-E3CO2Y',36,''],['1-E3CO4K',36,''],['1-E3COB4',36,''],['1-E3COBC',36,''],['1-E3COD0',33,''],['1-E3CODM',33,''],['1-E3COJE',39,''],['1-E3COLK',54,''],['1-E3COME',36,''],['1-E3DLUJ',33,''],['1-E3DLUV',33,''],['1-E3DLZN',36,''],['1-E3DM15',33,''],['1-E3DM6F',33,''],['1-E3DM7F',39,''],['1-E3DM9R',39,''],['1-E3DME6',30,''],['1-E3DMHA',33,''],['1-E3DMHI',39,''],['1-E3DMJZ',73,''],['1-E3E18U',33,''],['1-E3E18Y',33,''],['1-E3E1C5',36,''],['1-E3E1LL',33,''],['1-E3E1N0',30,''],['1-E3E1O7',39,''],['1-E3E1P3',36,''],['1-E3E1PB',36,''],['1-E3E1R7',36,''],['1-E3E1U8',33,''],['1-E3E1VW',36,''],['1-E3E1VZ',51,''],['1-E3FQCG',39,''],['1-E3FQCO',30,''],['1-E3FQDA',36,''],['1-E3FQDI',33,''],['1-E3FQDX',33,''],['1-E3FQE0',36,''],['1-E3FQEM',39,''],['1-E3FQEW',33,''],['1-E3FQF4',33,''],['1-E3FQFJ',39,''],['1-E3FQFW',33,''],['1-E3FQG0',33,''],['1-E3FQG8',36,''],['1-E3FQGG',33,''],['1-E3FQGL',33,''],['1-E3FQH5',33,''],['1-E3FQI8',39,''],['1-E3FQII',33,''],['1-E3FQJ4',36,''],['1-E3FQJG',39,''],['1-E3FQJR',36,''],['1-E3FTIF',33,''],['1-E3FTJP',39,''],['1-E3FTL5',33,''],['1-E3FTLP',36,''],['1-E3FTSB',33,''],['1-E3FTTU',39,''],['1-E3FTVE',36,''],['1-E3FU2M',39,''],['1-E3G0FI',36,''],['1-E3G0HI',33,''],['1-E3G0QC',33,''],['1-E3G0QM',33,''],['1-E3G0R2',48,''],['1-E3G0TR',39,''],['1-E3G0UH',33,''],['1-E3G0WY',33,''],['1-E3G0YB',33,''],['1-E3G11Y',33,''],['1-E3GEZE',33,''],['1-E3GF2Y',36,''],['1-E3GF3F',39,''],['1-E3GL5B',36,''],['1-E3GL5L',33,''],['1-E3GL62',36,''],['1-E3GL68',36,''],['1-E3GL6F',33,''],['1-E3GL8P',33,''],['1-E3GL91',39,''],['1-E3GL9H',36,''],['1-E3GL9X',39,''],['1-E3GLAP',33,''],['1-E3GLAR',30,''],['1-E3GLAX',33,''],['1-E3GLB3',33,''],['1-E3GLB9',39,''],['1-E3GLBD',33,''],['1-E3GLBL',30,''],['1-E3GLBR',39,''],['1-E3GLBZ',33,''],['1-E3GLC9',33,''],['1-E3GLEN',39,''],['1-E3GLJ1',36,''],['1-E3GLP0',54,''],['1-E3GLQQ',48,''],['1-E3GLR8',33,''],['1-E3GLUN',33,''],['1-E3GZTM',33,''],['1-E3GZV9',33,''],['1-E3GZVJ',36,''],['1-E3GZW0',33,''],['1-E3GZWM',30,''],['1-E3GZZU',36,''],['1-E3H004',36,''],['1-E3H01D',36,''],['1-E3H02I',33,''],['1-E3HG1R',39,''],['1-E3HG1Y',33,''],['1-E3HG20',39,''],['1-E3HG2I',39,''],['1-E3HG36',39,''],['1-E3HG3M',36,''],['1-E3HG3Y',39,''],['1-E3HGAL',51,''],['1-E3HGE9',33,''],['1-E3HGG4',36,''],['1-E3HGI6',39,''],['1-E3HGKX',33,''],['1-E3HGLW',36,''],['1-E3I1N4',39,''],['1-E3I1S3',39,''],['1-E3I1T6',33,''],['1-E3I1TL',39,''],['1-E3I1W3',39,''],['1-E3I1YL',33,''],['1-E3I1YR',30,''],['1-E3I1ZW',36,''],['1-E3I21U',39,''],['1-E3I221',36,''],['1-E3I22A',36,''],['1-E3I23S',33,''],['1-E3I26D',39,''],['1-E3I27W',39,''],['1-E3I28O',36,''],['1-E3I28Y',36,''],['1-E3I29M',36,''],['1-E3I2BR',36,''],['1-E3IO16',36,''],['1-E3IO2O',36,''],['1-E3IO3X',33,''],['1-E3IO6O',33,''],['1-E3IOCS',39,''],['1-E3IOEI',36,''],['1-E3IOHE',33,''],['1-E3IOHH',36,''],['1-E1234GR',73,''],['1-E1239B',76,''],['1-ZZZ1JZ',76,''],['1-WWW32FL',48,''],['1-EDKDKC',94,''],['1-E32343',54,''],           
+          ];
+          var store = new Ext.data.SimpleStore({
+            fields: [{name: 'si'},
+              {name: 'score', type: 'float'},
+              {name: 'lastChange', type: 'date', dateFormat: 'h:i'}]});
+          store.loadData(myData);
+          var siAirmax = new Ext.grid.GridPanel({
+            store: store,
+            columns: [
+              {id:'si',header: "SI #", width: 160, sortable: true, dataIndex: 'si'},
+              {header: "Score", width: 75, sortable: true, dataIndex: 'score'},
+              {header: "Time", width: 85, sortable: true, renderer: Ext.util.Format.dateRenderer('h:i'), dataIndex: 'lastChange'}
+            ],
+            stripeRows: true,
+            autoExpandColumn: 'si',
+            height:350,
+            width:600,
+            title:'Airmax'
+          });
+          var siGeneral = new Ext.grid.GridPanel({
+            store: store,
+            columns: [
+              {id:'si',header: "SI #", width: 160, sortable: true, dataIndex: 'si'},
+              {header: "Score", width: 75, sortable: true, dataIndex: 'score'},
+              {header: "Time", width: 85, sortable: true, renderer: Ext.util.Format.dateRenderer('h:i'), dataIndex: 'lastChange'}
+            ],
+            stripeRows: true,
+            autoExpandColumn: 'si',
+            height:350,
+            width:600,
+            title:'General'
+          });
+          var northPanel = new Ext.BoxComponent({
+            region:'north',
+            el: 'north',
+            height:32
+          });
+          var southPanel = {
+            region:'south',
+            contentEl: 'south',
+            split:true,
+            height: 100,
+            minSize: 100,
+            maxSize: 200,
+            collapsible: true,
+            title:'La Barra de Abajo',
+            margins:'0 0 0 0'
+          };
+          var eastPanel = {
+            region:'east',
+            title: 'Service Incidents',
+            //collapsible: true,
+            split:true,
+            width: 225,
+            minSize: 175,
+            maxSize: 400,
+            layout:'fit',
+            margins:'0 5 0 0',
+            items: new Ext.TabPanel
+            ({
+              border:false,
+              activeTab:1,
+              tabPosition:'bottom',
+              items:[
+                siGeneral,
+                siAirmax
+              ]
+            })};
+          var westPanel = {
+            region:'west',
+            id:'west-panel',
+            title:'Thermometer',
+            split:true,
+            width: 200,
+            minSize: 175,
+            maxSize: 400,
+            //collapsible: true,
+            margins:'0 0 0 5',
+            //layout:'accordion',
+            layoutConfig:{animate:true},
+            items:
+            [{
+              contentEl: 'termometro',
+              border:false,
+              iconCls:'airmax'
+            }]
+          };
+          var centerPanel = {
+            region:'center',
+            items:
+            [{contentEl:'graphs',
+              title: 'Graphs',
+              //closable:true,
+              autoScroll:true}]
+          };
+          var viewport = new Ext.Viewport
+          ({
+            layout:'border',
+            items:
+            [northPanel,southPanel,eastPanel,westPanel,centerPanel]
+          });          
+        }
+      );
+	</script>
+  </head>
+
+  <body>
+    
+    <div id="termometro">
+      <div id="graph">
+        <table height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
+          <script type="text/javascript">
+              new Ajax.PeriodicalUpdater('graph', './ajaxUpdate.php', {
+                method: 'get', frequency: 2, decay: 1
+              });
+          </script>          
+        </table>
+      </div>
+    </div>
+    <div id="north">
+
+      <p>
+        <center><h1>The Help Desk Severity Monitor</h1></center>
+      </p>
+    </div>
+ 
+ 
+     
+    
+    
+    <div id="props-panel" style="width:200px;height:200px;overflow:hidden;">
+      <!-- Back Panel ... No usar... -->
+    </div>
+    <div id="south">
+      <p>Panel 6</p>
+
+    </div>
+  </body>
+</html>
