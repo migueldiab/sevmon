@@ -15,17 +15,19 @@ public class DAOFactory {
 	public static Object getDAO(String entityClassName){
 		logger.debug("Loading DAO object for class " + entityClassName);
 		Object daoObject = null;
-		if (daoObjects== null) {
+		if (daoObjects == null) {
 			URL url = ClassLoader.getSystemResource("daoObjects.properties");
 			try {
+				daoObjects = new Properties();
 				daoObjects.load(url.openStream());
-				String daoClass = daoObjects.getProperty(entityClassName);
-				daoObject = com.sabre.hdt.util.ClassLoader.loadClass(daoClass);
 			} catch (IOException e) {
 				logger.error(e);
 				throw new RuntimeException("Error while instantiating DAO object implementation for " + entityClassName);
 			}
 		}
+		
+		String daoClass = daoObjects.getProperty(entityClassName);
+		daoObject = com.sabre.hdt.util.ClassLoader.loadClass(daoClass);
 		return daoObject;
 	}
 }

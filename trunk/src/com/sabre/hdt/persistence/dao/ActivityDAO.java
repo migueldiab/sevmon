@@ -7,7 +7,7 @@ import com.sabre.hdt.persistence.dao.exceptions.ActivityNotFoundException;
 
 public interface ActivityDAO {
 
-	public Activity findActivitieByPK(String pk) throws ActivityNotFoundException;
+	public Activity findActivityByPK(String pk) throws ActivityNotFoundException;
 	
 	public Collection<Activity> findAll() throws ActivityNotFoundException;
 	

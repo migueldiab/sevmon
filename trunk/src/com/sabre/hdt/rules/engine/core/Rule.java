@@ -35,6 +35,10 @@ public abstract class Rule {
 	public int getID(){
 		return id;
 	}
+	
+	public List<Integer> getRegularExpressions(){
+		return res;
+	}
 }
 
 

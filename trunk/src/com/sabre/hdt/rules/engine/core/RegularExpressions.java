@@ -15,16 +15,23 @@ public class RegularExpressions {
 	
 	private static Logger logger = Logger.getLogger(RulesGroup.class.getName());
 	
-	private List<RE> re;
+	private static List<RE> re;
 	
 	public RegularExpressions(){
 		
-		this.re = new ArrayList();
 	}
 	
-	public void loadRegularExpression() {
+	public static String getRE(int i){
+		
+		RE reexp = (RE)re.get(i);
+		return reexp.getRE();
+	}
+	
+	public static void loadRegularExpression() {
 		
 		logger.debug("Loading regular expressions = ");// + getRuleId());
+		
+		re = new ArrayList();
 		
 	    try {
 	        //  Use SAXBuilder
@@ -43,8 +50,8 @@ public class RegularExpressions {
 					
 					logger.debug("Setting Regular Expression "+ exp);
 					
-										
-					this.re.add(new RE(id,exp));															
+								
+					re.add(new RE(id,exp));															
 			}								        	      	       
 	      } catch (Exception e) {
 	    	  e.printStackTrace();
