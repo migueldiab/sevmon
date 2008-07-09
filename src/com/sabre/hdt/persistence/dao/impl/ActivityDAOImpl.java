@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -194,12 +195,9 @@ public class ActivityDAOImpl implements ActivityDAO {
 			stmtUpdate.setString(5, activity.getAccountLocation());
 			stmtUpdate.setString(6, activity.getDescription());
 			stmtUpdate.setString(7, activity.getEmailSender());
-			stmtUpdate.setDate(8, new java.sql.Date(activity.getLastUpdated()
-					.getTime()));
-			stmtUpdate.setDate(9, new java.sql.Date(activity.getPlannedStart()
-					.getTime()));
-			stmtUpdate.setDate(10, new java.sql.Date(activity.getCreated()
-					.getTime()));
+			stmtUpdate.setTimestamp(8, new Timestamp(activity.getLastUpdated().getTime()));
+			stmtUpdate.setTimestamp(9, new Timestamp(activity.getPlannedStart().getTime()));
+			stmtUpdate.setTimestamp(10, new Timestamp(activity.getCreated().getTime()));
 			stmtUpdate.setInt(11, activity.getScore());
 			stmtUpdate.setString(12, activity.getActivityId());
 			logger.debug("SQL: " + stmtUpdate.toString());
