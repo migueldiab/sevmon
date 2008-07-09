@@ -14,6 +14,8 @@ public class Rule001 extends Rule {
 	
 	public int execute(Activity activity) {
 		String body = activity.getDescription();
+		String subject = activity.getActivityName(); 
+		
 		int tmpScore = 0;		
 		
 		for (Iterator iterator = this.getRegularExpressions().iterator(); iterator.hasNext();) {
@@ -21,12 +23,18 @@ public class Rule001 extends Rule {
 			String regexp = RegularExpressions.getRE(i);
 			Pattern pattregex = Pattern.compile(regexp);
 			Matcher regexFit = pattregex.matcher(body);	
+			Matcher subjectFit = pattregex.matcher(subject);
 			
             if (regexFit.find()) {
             	logger.debug(" INSIDE REGEXP");
             	logger.debug("LIFETIME  :" + activity.getLifeTime() );
-            	tmpScore = (int)(tmpScore + this.getValue() + activity.getLifeTime() * 0.5); 
-            	
+            	tmpScore = (int)(tmpScore + this.getValue() + activity.getLifeTime() * 0.05);             	
+            } 
+            
+            if (subjectFit.find()) {
+            	logger.debug(" INSIDE REGEXP");
+            	logger.debug("LIFETIME  :" + activity.getLifeTime() );
+            	tmpScore = (int)(tmpScore + this.getValue() + activity.getLifeTime() * 0.05);             	
             } 
 		}
 		logger.debug("RULE SCORE" + tmpScore );
