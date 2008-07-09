@@ -186,8 +186,7 @@ public class Activity extends PersistentObject{
 		} catch (ActivityNotFoundException e) {
 			logger.error(e);
 			throw new RuntimeException(e);
-		}
-		
+		}		
 	}
 
 	@Override
@@ -224,7 +223,7 @@ public class Activity extends PersistentObject{
 		Date tmpDate = this.getPlannedStart();
 		Date now = new Date();  
 			
-		TimeSpan ts = TimeSpan.subtract(tmpDate, now);
+		TimeSpan ts = TimeSpan.subtract(now,tmpDate);
 				    
 		return (int) ts.getMinutes(); 
 		//TimeSpan 
