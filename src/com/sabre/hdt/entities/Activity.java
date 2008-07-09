@@ -220,7 +220,7 @@ public class Activity extends PersistentObject{
 	
 	public int getLifeTime(){
 		
-		Date tmpDate = this.getPlannedStart();
+		Date tmpDate = new Date(this.getPlannedStart().getTime());
 		Date now = new Date();  
 			
 		TimeSpan ts = TimeSpan.subtract(now,tmpDate);
