@@ -3,20 +3,22 @@ package com.sabre.hdt.rules.impl;
 import java.util.Iterator;
 import java.util.regex.*;
 import com.sabre.hdt.entities.*;
-import com.sabre.hdt.parser.test.Test;
+import com.sabre.hdt.parser.test.SevMon;
 import com.sabre.hdt.rules.engine.core.*;
 import org.apache.log4j.Logger;
 
 
 public class Rule001 extends Rule {
 
-	private static Logger logger = Logger.getLogger(Test.class.getName());
+	private static Logger logger = Logger.getLogger(SevMon.class.getName());
 	
 	public int execute(Activity activity) {
 		String body = activity.getDescription();
 		String subject = activity.getActivityName();
 		
-		int tmpScore = 0;	
+		//int tmpScore = activity.getScore();	
+		int tmpScore = 0;
+		
 		boolean b = false;
 		
 		for (Iterator iterator = this.getRegularExpressions().iterator(); iterator.hasNext();) {
@@ -29,14 +31,14 @@ public class Rule001 extends Rule {
             if (regexFit.find()) {
             	logger.debug(" INSIDE REGEXP");
             	logger.debug("LIFETIME  :" + activity.getLifeTime() );
-            	tmpScore = (int)(tmpScore + this.getValue() + activity.getLifeTime() * 0.05); 
+            	tmpScore = (int)(tmpScore + this.getValue() + activity.getLifeTime() * 0.005); 
             	b = true;         
             } 
             
             if (subjectFit.find()) {
             	logger.debug(" INSIDE REGEXP");
             	logger.debug("LIFETIME  :" + activity.getLifeTime() );
-            	tmpScore = (int)(tmpScore + this.getValue() + activity.getLifeTime() * 0.05);
+            	tmpScore = (int)(tmpScore + this.getValue() + activity.getLifeTime() * 0.005);
             	b = true;
             } 
 		}
@@ -44,8 +46,11 @@ public class Rule001 extends Rule {
 		if (b == false)
 			if (tmpScore == 0){
 				tmpScore = 10;
-				tmpScore = (int)(tmpScore + activity.getLifeTime() * 0.05);
+				tmpScore = (int)(tmpScore + activity.getLifeTime() * 0.005);
 			}
+		
+		if (tmpScore > 100)
+			tmpScore = 100;
 		
 		logger.debug("RULE SCORE" + tmpScore );
 		return tmpScore;		
