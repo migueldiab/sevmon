@@ -1,0 +1,61 @@
+/* 
+    Document   : graph
+    Created on : Jul 8, 2008, 6:45:19 PM
+    Author     : SG0894180
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#graph {
+  background:#F8F7F3;
+  margin:0;
+  padding:0;
+  height:100%;
+  border:1px solid #444;
+}
+#graph ul.bar {
+  list-style:none;
+  margin:0;
+  padding:15px 0 0 0;
+  font:normal 10px/250% Verdana, arial;
+  text-align:center;
+  color:#fff;
+}
+#graph ul.legend{
+  display:inline-block;
+  clear:both;
+  margin:0;
+  padding:10px 0;
+  background-color:#444;
+  font:normal 14px Georgia, "Times New Roman", Times, serif;
+  text-align:center;
+  color:#eee;
+  _height: 1%; /* make ie6 play nice */
+}
+/* clear the legend */
+#graph ul.legend:after{
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+#graph ul.legend{ display:block; }
+#graph ul li{
+  display:inline; /* trick ie6 to not do double margin bug */
+  float:left; /* float will reset to block */
+  margin:0 15px 0;
+  padding:0;
+}
+#graph ul.bar li div, #graph ul.bar li span{ display:block; overflow:hidden; }
+#graph ul.bar li div.no-results{ color:#888; }
+#graph ul.bar li span{
+  height:15px;
+  line-height:100%;
+  color:#888;
+} 

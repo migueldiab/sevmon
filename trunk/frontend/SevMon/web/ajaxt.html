@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <script type="text/javascript" src="./js/prototype.js"></script>
+  </head>
+  <body>
+    <form>
+      First Name:<input type="text" id="txt1">
+    </form>
+    <p>Suggestions: <span id="txtHint"></span></p>
+    <script type="text/javascript">
+      new Ajax.PeriodicalUpdater('txtHint', './testdata.html', {
+        method: 'get', frequency: 3, decay: 1
+      });
+    </script>
+  </body>
+</html>
+

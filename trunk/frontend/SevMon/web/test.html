@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+
+<script type="text/javascript" src="mochikit/MochiKit.js"></script>
+<script type="text/javascript" src="plotkit/excanvas.js"></script>
+<script type="text/javascript" src="plotkit/PlotKit_Packed.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+function demo() {
+
+   var hasCanvas = CanvasRenderer.isSupported();
+
+   var opts = {
+   "pieRadius": 0.4
+   };
+
+   var data1 = [[0, 5], [1, 4], [2, 3], [3, 5], [4, 6], [5, 7]];
+   var data2 = [[0, 2.5], [1, 2], [2, 1.5], [3, 2.5], [4, 3], [5,3.5]];
+   var data3 = [[0, 1.25], [1, 1], [2, 0.75], [3, 1.25], [4, 1.5], [5, 1.75]];
+   
+   if (hasCanvas) {
+       var line = new EasyPlot("line", opts, $('canvasline'), [data1, data2, data3]);
+   }
+}
+
+addLoadEvent(demo);
+//]]>
+</script>
+
+
+        
+    </head>
+    <body>
+        <div id="page">
+
+                    
+<h1> Demo</h1>
+<div class="demo" id="canvasline" width="600" height="200"></div>
+
+        </div>
+
+    </body>
+</html>
