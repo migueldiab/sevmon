@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 
 import com.sabre.hdt.entities.Activity;
-import com.sabre.hdt.parser.test.Test;
+import com.sabre.hdt.parser.test.SevMon;
 import com.sabre.hdt.rules.engine.core.RegularExpressions;
 import com.sabre.hdt.rules.engine.core.Rule;
 
