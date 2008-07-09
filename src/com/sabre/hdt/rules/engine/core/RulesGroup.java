@@ -26,13 +26,20 @@ public class RulesGroup {
 		this.loadRules();
 	}	
 
-	public double execute(Activity activity){
+	public int execute(Activity activity){
 		double output = 0;
 		for (int i = 0; i < this.rules.size(); i++) {
+			
+			logger.debug(" message from EXECUTE");
+			logger.debug(activity);
+			
 			Rule rule = this.rules.get(i);
 			output += rule.execute(activity);
+			
+			logger.debug("OUT from EXECUTE ITERATION");
+			logger.debug(output);
 		}
-		return output;
+		return (int) output;
 	}
 	
 	private void loadRules() {
@@ -63,8 +70,10 @@ public class RulesGroup {
 			        	Element ch = ruleElements.get(j);
 						String ruleID = ch.getAttributeValue("id");
 						rl.setRE(Integer.parseInt(ruleID));
-						logger.debug("Setting Rule RE id = " + ruleID);
+						logger.debug("Setting Rule RE id = " + ruleID);						
 					}
+					
+					this.rules.add(rl);
 				}						
 		        
 	      } catch (Exception e) {

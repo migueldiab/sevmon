@@ -58,7 +58,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 		}
 	}
 
-	public Activity findActivitieByPK(String pk)
+	public Activity findActivityByPK(String pk)
 			throws ActivityNotFoundException {
 		if (pk == null || pk.trim().equals("")) {
 			logger.error("Activity PK is required!");
@@ -92,7 +92,8 @@ public class ActivityDAOImpl implements ActivityDAO {
 						rs.getString("email_sender"), rs
 								.getDate("last_updated"), rs
 								.getDate("planned_start"), rs
-								.getDate("created"));
+								.getDate("created"),
+						rs.getInt("score"));
 			} else {
 				throw new ActivityNotFoundException();
 			}
@@ -120,7 +121,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 			sbInsert.append(ActivityDAOImpl.TABLE_NAME);
 			sbInsert
 					.append(" ( activity_id, Activity_Name, status, attachments, email_cc, account_location, description, email_sender, last_updated, planned_start, created) ");
-			sbInsert.append(" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			sbInsert.append(" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 			stmtInsert = conn.prepareStatement(sbInsert.toString());
 
@@ -138,6 +139,8 @@ public class ActivityDAOImpl implements ActivityDAO {
 					.getTime()));
 			stmtInsert.setDate(11, new java.sql.Date(activity.getCreated()
 					.getTime()));
+			stmtInsert.setInt(12, activity.getScore());
+
 
 			logger.info("About to execute INSERT: values "
 					+ activity.toString());
@@ -180,6 +183,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 			sbUpdate.append(" last_updated = ? ");
 			sbUpdate.append(" planned_start = ?, ");
 			sbUpdate.append(" created = ?, ");
+			sbUpdate.append(" score = ? ");
 			sbUpdate.append(" WHERE activity_id = ?");
 			stmtUpdate = conn.prepareStatement(sbUpdate.toString());
 
@@ -196,7 +200,8 @@ public class ActivityDAOImpl implements ActivityDAO {
 					.getTime()));
 			stmtUpdate.setDate(10, new java.sql.Date(activity.getCreated()
 					.getTime()));
-			stmtUpdate.setString(10, activity.getActivityId());
+			stmtUpdate.setInt(11, activity.getScore());
+			stmtUpdate.setString(12, activity.getActivityId());
 			int rows = stmtUpdate.executeUpdate();
 
 			if (rows != 1) {
@@ -237,8 +242,10 @@ public class ActivityDAOImpl implements ActivityDAO {
 								.getString("email_sender"), rs
 								.getDate("last_updated"), rs
 								.getDate("planned_start"), rs
-								.getDate("created"));
+								.getDate("created"),
+								rs.getInt("score"));
 				result.add(activity);
+				logger.debug(activity);
 			}
 			if (result.isEmpty()) {
 				logger.info("No activities were found...");

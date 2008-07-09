@@ -24,10 +24,13 @@ public class Activity extends PersistentObject{
 	private Date lastUpdated;
 	private Date plannedStart;
 	private Date created;
+	private int score;
+
+
 	private ActivityDAO dao;
 	
 	public Activity(String activityId, String activityName, String status, String attachments, String emailCC, String accountLocation,
-			String description, String emailSender, Date lastUpdated, Date plannedStart, Date created){
+			String description, String emailSender, Date lastUpdated, Date plannedStart, Date created, int score){
 		this.activityId = activityId;
 		this.activityName = activityName;
 		this.status = status;
@@ -39,8 +42,17 @@ public class Activity extends PersistentObject{
 		this.lastUpdated = lastUpdated;
 		this.plannedStart = plannedStart;
 		this.created = created;
+		this.score = score;
 	}
 
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 	public Activity(){
 		
 	}
@@ -193,7 +205,7 @@ public class Activity extends PersistentObject{
 	}
 
 	public static Activity findByPK(String activityId) throws ActivityNotFoundException {
-		return getDaoStatic().findActivitieByPK(activityId);
+		return getDaoStatic().findActivityByPK(activityId);
 	}
 
 	public static Collection<Activity> findAll() {
