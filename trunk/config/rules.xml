@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules>
-		<rule id="1" class="com.sabre.hdt.rules.impl.TestRule" value="12">
+		<rule id="1" class="com.sabre.hdt.rules.impl.Rule001" value="2">
 				<re id="0"></re>
 				<re id="1"></re>
 				<re id="2"></re>
 				<re id="3"></re>
 		</rule>
-		<rule id="2" class="com.sabre.hdt.rules.impl.REOverSubject" value="13">
+		<rule id="2" class="com.sabre.hdt.rules.impl.Rule001" value="3">
 				<re id="0"></re>
 				<re id="1"></re>
 				<re id="2"></re>
 				<re id="3"></re>
 		</rule>
-		<rule id="2" class="com.sabre.hdt.rules.impl.Rule001" value="13">
+		<rule id="2" class="com.sabre.hdt.rules.impl.Rule001" value="10">
 				<re id="0"></re>
 				<re id="1"></re>
 				<re id="2"></re>
