@@ -186,7 +186,7 @@ public class Activity extends PersistentObject{
 		} catch (ActivityNotFoundException e) {
 			logger.error(e);
 			throw new RuntimeException(e);
-		}		
+		}
 	}
 
 	@Override

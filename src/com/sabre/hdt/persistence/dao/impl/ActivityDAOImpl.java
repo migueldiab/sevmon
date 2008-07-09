@@ -83,16 +83,18 @@ public class ActivityDAOImpl implements ActivityDAO {
 			logger.debug("SQL: " + stmtSelect.toString());
 			rs = stmtSelect.executeQuery();
 			if (rs.next()) {
-				result = new Activity(rs.getString("activity_id"), rs
-						.getString("activity_name"), rs.getString("status"), rs
-						.getString("attachments"), rs.getString("email_cc"), rs
-						.getString("account_location"), rs
-						.getString("description"),
-						rs.getString("email_sender"), rs
-								.getDate("last_updated"), rs
-								.getDate("planned_start"), rs
-								.getDate("created"),
-						rs.getInt("score"));
+				result = new Activity(rs.getString("activity_id"), 
+										rs.getString("activity_name"), 
+										rs.getString("status"), 
+										rs.getString("attachments"), 
+										rs.getString("email_cc"), 
+										rs.getString("account_location"), 
+										rs.getString("description"),
+										rs.getString("email_sender"), 
+										new java.util.Date(rs.getTimestamp("last_updated").getTime()), 
+										new java.util.Date(rs.getTimestamp("planned_start").getTime()), 
+										new java.util.Date(rs.getTimestamp("created").getTime()),
+										rs.getInt("score"));
 			} else {
 				throw new ActivityNotFoundException();
 			}
@@ -235,15 +237,17 @@ public class ActivityDAOImpl implements ActivityDAO {
 			rs = stmtSelect.executeQuery();
 			while (rs.next()) {
 				Activity activity = new Activity(rs.getString("activity_id"),
-						rs.getString("activity_name"), rs.getString("status"),
-						rs.getString("attachments"), rs.getString("email_cc"),
-						rs.getString("account_location"), rs
-								.getString("description"), rs
-								.getString("email_sender"), rs
-								.getDate("last_updated"), rs
-								.getDate("planned_start"), rs
-								.getDate("created"),
-								rs.getInt("score"));
+						rs.getString("activity_name"), 
+						rs.getString("status"),
+						rs.getString("attachments"), 
+						rs.getString("email_cc"),
+						rs.getString("account_location"), 
+						rs.getString("description"), 
+						rs.getString("email_sender"), 
+						new java.util.Date(rs.getTimestamp("last_updated").getTime()), 
+						new java.util.Date(rs.getTimestamp("planned_start").getTime()), 
+						new java.util.Date(rs.getTimestamp("created").getTime()),
+						rs.getInt("score"));
 				result.add(activity);
 				logger.debug(activity);
 			}
