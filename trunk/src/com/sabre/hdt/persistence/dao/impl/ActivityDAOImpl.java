@@ -185,6 +185,7 @@ public class ActivityDAOImpl implements ActivityDAO {
 			sbUpdate.append(" created = ?, ");
 			sbUpdate.append(" score = ? ");
 			sbUpdate.append(" WHERE activity_id = ?");
+			logger.debug("SQL: sbUpdate.toString()");
 			stmtUpdate = conn.prepareStatement(sbUpdate.toString());
 
 			stmtUpdate.setString(1, activity.getActivityName());
