@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <res>
-		<re id="0" exp="a"></re>
-		<re id="1" exp="b"></re>
-		<re id="2" exp="c"></re>
-		<re id="3" exp="f"></re>
+		<re id="0" exp="DCPREP|DCFD|DCAGG|DCFDB|DCAD|DCADF|DCFDI"></re>
+		<re id="1" exp="DCPREP|DCFD|DCAGG|DCFDB|DCAD|DCADF|DCFDI"></re>
+		<re id="2" exp="DIMPL|DISIL"></re>
+		<re id="3" exp="DVDC|DCVDF|MDQ|DCMSC|DCMOD|DCMOD2|DCEND"></re>
+		<re id="4" exp="PCTKT|PCASVC|DCZF"></re>
+		<re id="5" exp="PERFM|DCPERFM|DCPOST"></re>		
+		<re id="6" exp="severity1|URGENT|critical|severity 1|severity one|"></re>
+		<re id="7" exp="batch failure|oracle error|database error|crash"></re>	
 </res>
