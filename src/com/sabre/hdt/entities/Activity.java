@@ -227,10 +227,12 @@ public class Activity extends PersistentObject{
 		logger.debug("TIME BASE" + tmpDate);
 			
 		TimeSpan ts = TimeSpan.subtract(now,tmpDate);
-
-		logger.debug("TIME TS" + ts.getMinutes() );
+				    
+		logger.debug("TS " + ts.getSeconds());
 		
-		return (int) ts.getMinutes(); 
+		return (int) ts.getSeconds(); 
+		
+		
 		//TimeSpan 
 		
 		//tmpDate.getTime();
